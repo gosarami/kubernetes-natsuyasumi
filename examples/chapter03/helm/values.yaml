@@ -1,0 +1,15 @@
+# Default values for nginx.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# image is main image for nginx app.
+image:
+  repository: nginx
+  tag: 1.18.0
+
+# env is expanded in /usr/share/nginx/html/contents.html
+env: ""
+
+# if sidecar.enabled set true, inject busybox container in your pod
+sidecar:
+  enabled: false    

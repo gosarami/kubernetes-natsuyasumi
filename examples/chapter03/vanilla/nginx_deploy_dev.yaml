@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx:1.19.0
+        name: nginx
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "echo thisisdev > /usr/share/nginx/html/contents.html"]
+      - image: busybox:1.31.1
+        name: busybox
+        command: ["/bin/tail", "-f", "/dev/null"]
+      serviceAccountName: nginx
+      priorityClassName: nginx
+        

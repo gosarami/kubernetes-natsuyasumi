@@ -1,0 +1,8 @@
+1. This is NOTES.txt
+
+Nginx Image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+Environment: {{ .Values.env }}.
+
+{{- if .Values.sidecar.enabled }}
+You Set 'sidecar.enabled=true', So Sidecar Deployed!
+{{- end }}      

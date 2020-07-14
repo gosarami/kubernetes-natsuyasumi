@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx:1.18.0
+        name: nginx
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "echo thisisprod > /usr/share/nginx/html/contents.html"]
+      serviceAccountName: nginx
+      priorityClassName: nginx
+        
