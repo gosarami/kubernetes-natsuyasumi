@@ -1,0 +1,29 @@
+releases:
+- name: helmfile-exercise-{{ .Environment.Name }}
+  namespace: default
+  chart: ../../helm
+  values:
+  - values.yaml.gotmpl
+
+environments:
+  dev:
+    values:
+    - image:
+        tag: 1.19.0
+    - env: dev
+    - sidecar:
+        enabled: true
+  staging:
+    values:
+    - image:
+        tag: 1.18.0
+    - env: staging
+    - sidecar:
+        enabled: false
+  prod:
+    values:
+    - image:
+        tag: 1.18.0
+    - env: prod
+    - sidecar:
+        enabled: false
